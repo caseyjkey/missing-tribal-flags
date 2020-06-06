@@ -2,7 +2,7 @@
 This tool was created to compile a list of tribes who are missing their tribal 
 flag within the National Museum of the American Indian (or NMAI) in Washington, DC.
 
-Included in this repo is a copy of the flags available and a copy of tribes found (here)[https://www.bia.gov/tribal-leaders-directory].
+Included in this repo is a copy of the flags available and a copy of tribes found [here](https://www.bia.gov/tribal-leaders-directory).
 
 # Goals
 1. Increase representation of tribal communities at the NMAI and within Amazon.
