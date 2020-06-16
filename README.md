@@ -1,3 +1,8 @@
+# Instructions
+1. Install `pandas` and `xlrd`
+2. Run `python3 check_flags.py`
+3. Open output.csv
+
 # Introduction
 This tool was created to compile a list of tribes who are missing their tribal 
 flag within the National Museum of the American Indian (or NMAI) in Washington, DC.
