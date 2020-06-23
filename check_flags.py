@@ -13,8 +13,8 @@ def missing_flags(flags, tribes):
 
         # Match shorter tribe name to full tribe name
         # Example: matches when given 'Absentee-Shawnee' and 'Absentee-Shawnee Tribe of Indians of Oklahoma'
-        tribe_tokens = tribe.split('-')
-        tribe_tokens = tribe.split()
+        tribe_tokens = set(tribe.split('-'))
+        [tribe_tokens.add(tribe) for token in tribe.split()]
 
         regex_string = '^'
         for word in tribe_tokens:
@@ -36,7 +36,7 @@ def missing_flags(flags, tribes):
 if __name__ == '__main__':
     tribes = pd.read_csv('tribes.csv')
     flags = pd.read_excel('flags.xlsx')
-    tribes = missing_flags(flags, tribes)
+    tribes = missing_flags(flags[:5], tribes[:5])
     print(len(tribes))
     with open('output.csv', 'w', newline='') as outfile:
         wr = csv.writer(outfile, quoting=csv.QUOTE_ALL)
