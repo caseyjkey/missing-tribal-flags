@@ -5,22 +5,25 @@ import re
 def missing_flags(flags, tribes):
     # Remove all flags which are oversize
     flags = flags[~flags['Notes/Dimensions'].str.contains("Oversize", na=False)]
-    print(flags)
 
     tribes_missing_flag = []
     for tribe in tribes['Tribe']:
-        flag_missing = True
-
         # Match shorter tribe name to full tribe name
-        # Example: matches when given 'Absentee-Shawnee' and 'Absentee-Shawnee Tribe of Indians of Oklahoma'
-        tribe_tokens = tribe.split('-')
-        tribe_tokens = tribe.split()
+        # Example: match 'Absentee-Shawnee' and 'Absentee Shawnee Tribe'
+        # Example: match 'Ak Chin' and 'Ak-Chin'
+        # 1. tokenize tribe by splitting by blankspace
+        # 2. If token has hyphens, split by '-'
+        tribe_tokens = []
+        for token in tribe.split():
+            if '-' in token:
+                [tribe_tokens.append(token) for token in token.split('-')]
+            else:
+                tribe_tokens.append(token)
 
         regex_string = '^'
         for word in tribe_tokens:
             regex_string += '(?=.*\\b' + word + '\\b)'
         regex_string += '.*$'
-        print(regex_string)
         r = re.compile(regex_string)
         
         # Determine if a flag is in museum's collection
@@ -43,5 +46,6 @@ if __name__ == '__main__':
         wr.writerow(['Tribe'])
         for tribe in tribes:
             wr.writerow([tribe])
-    # assert('Rosebud' not in tribes)
+    assert('Rosebud' not in tribes)
+    assert('Oglala Sioux' in tribes)
     
